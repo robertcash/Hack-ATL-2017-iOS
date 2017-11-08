@@ -70,11 +70,12 @@
     
     [[HackATLAPI sharedManager] createQuestion:question completionHandler:^(BOOL error) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            CreateQuestionViewController *selfRef = weakSelf;
             if (error) {
-                [weakSelf showAlert:@"Error" subTitle:@"Please try again!" dismiss:NO controller:weakSelf];
+                [selfRef showAlert:@"Error" subTitle:@"Please try again!" dismiss:NO controller:selfRef];
                 return;
             }
-            [weakSelf showAlert:@"Success" subTitle:@"Question sent!" dismiss:YES controller:weakSelf];
+            [selfRef showAlert:@"Success" subTitle:@"Question sent!" dismiss:YES controller:selfRef];
         });
     }];
 }

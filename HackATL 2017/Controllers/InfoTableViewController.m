@@ -117,10 +117,11 @@
     [self.activityIndicator startAnimating];
     [[HackATLAPI sharedManager] getInfo:self.infoType completionHandler:^(NSArray *info, BOOL error){
         dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf.activityIndicator stopAnimating];
-            [weakSelf setupTableViewErrorLabel:error withData: info andWithWeakSelf:weakSelf];
-            weakSelf.info = info;
-            [weakSelf.tableView reloadData];
+            InfoTableViewController *selfRef = weakSelf
+            [selfRef.activityIndicator stopAnimating];
+            [selfRef setupTableViewErrorLabel:error withData: info andWithWeakSelf:selfRef];
+            selfRef.info = info;
+            [selfRef.tableView reloadData];
         });
     }];
 }

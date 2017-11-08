@@ -133,10 +133,11 @@
     
     [[HackATLAPI sharedManager] getSchedule:^(NSArray *events, BOOL error){
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.activityIndicator stopAnimating];
-            [weakSelf setupTableViewErrorLabel:error withData: events andWithWeakSelf:weakSelf];
-            [weakSelf setupData:events controller:weakSelf];
-            [weakSelf.tableView reloadData];
+            ScheduleTableViewController *selfRef = weakSelf;
+            [selfRef.activityIndicator stopAnimating];
+            [selfRef setupTableViewErrorLabel:error withData: events andWithWeakSelf:selfRef];
+            [selfRef setupData:events controller:selfRef];
+            [selfRef.tableView reloadData];
         });
     }];
 }

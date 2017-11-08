@@ -140,14 +140,15 @@
     __weak __typeof__(self) weakSelf = self;
     [[HackATLAPI sharedManager] getQuestions: userId completionHandler:^(NSArray *questions, BOOL error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.activityIndicator stopAnimating];
-            if (weakSelf.refreshControl) {
-                [weakSelf.refreshControl endRefreshing];
+            QuestionTableViewController *selfRef = weakSelf;
+            [selfRef.activityIndicator stopAnimating];
+            if (selfRef.refreshControl) {
+                [selfRef.refreshControl endRefreshing];
             }
             
-            [weakSelf setupTableViewErrorLabel:error withData: questions andWithWeakSelf:weakSelf];
-            weakSelf.questions = questions;
-            [weakSelf.tableView reloadData];
+            [selfRef setupTableViewErrorLabel:error withData: questions andWithWeakSelf: selfRef];
+            selfRef.questions = questions;
+            [selfRef.tableView reloadData];
         });
     }];
 }

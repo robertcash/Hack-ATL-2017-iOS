@@ -51,14 +51,15 @@
     [self.activityIndicator startAnimating];
     [[HackATLAPI sharedManager] getMapImage:^(NSString *url, BOOL error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf.activityIndicator stopAnimating];
-            [weakSelf.activityIndicator setHidden:YES];
+            MapViewController *selfRef = weakSelf;
+            [selfRef.activityIndicator stopAnimating];
+            [selfRef.activityIndicator setHidden:YES];
             if (error) {
-                [weakSelf showAlert:@"Error" subTitle:@"Map image failed to load, try again!" dismiss:YES controller:weakSelf];
+                [selfRef showAlert:@"Error" subTitle:@"Map image failed to load, try again!" dismiss:YES controller:selfRef];
                 return;
             }
             NSLog(@"%@", url);
-            [weakSelf.mapView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+            [selfRef.mapView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
         });
     }];
 }

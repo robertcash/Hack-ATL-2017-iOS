@@ -113,14 +113,15 @@
     
     [[HackATLAPI sharedManager] getAnnoucements:^(NSArray *annoucements, BOOL error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.activityIndicator stopAnimating];
-            if (weakSelf.refreshControl) {
-                [weakSelf.refreshControl endRefreshing];
+            AnnoucementsTableViewController *selfRef = weakSelf;
+            [selfRef.activityIndicator stopAnimating];
+            if (selfRef.refreshControl) {
+                [selfRef.refreshControl endRefreshing];
             }
             
-            [weakSelf setupTableViewErrorLabel:error withData: annoucements andWithWeakSelf:weakSelf ];
-            weakSelf.annoucements = annoucements;
-            [weakSelf.tableView reloadData];
+            [selfRef setupTableViewErrorLabel:error withData: annoucements andWithWeakSelf: selfRef];
+            selfRef.annoucements = annoucements;
+            [selfRef.tableView reloadData];
         });
     }];
 }
