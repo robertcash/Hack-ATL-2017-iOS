@@ -6,6 +6,7 @@
 //  Copyright © 2017 Robert Cash. All rights reserved.
 //
 
+#import "ARMapViewController.h"
 #import <XCTest/XCTest.h>
 
 @interface HackATL_2017Tests : XCTestCase
@@ -26,7 +27,7 @@
 
 - (void)testExample {
     // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+    // Use XCTAssert and related functions to verify your tests produce the correct results.    
 }
 
 - (void)testPerformanceExample {
